@@ -61,9 +61,15 @@ stages:
         publishWebProjects: false
         arguments: '--no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
         zipAfterPublish: true
-
+  
     - publish: '$(Build.ArtifactStagingDirectory)'
       artifact: drop
+      
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathToPublish: '$(Build.SourcesDirectory)/aws'
+        artifactName: aws
+
 
 - stage: 'Deploy'
   displayName: 'Deploy the web application'
