@@ -3,6 +3,7 @@ trigger:
 
 variables:
   buildConfiguration: 'Release'
+  isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
 
 stages:
 - stage: 'Build'
@@ -74,6 +75,7 @@ stages:
 - stage: 'Deploy'
   displayName: 'Deploy the web application'
   dependsOn: Build
+  condition: and(succeeded(), eq(variables.isMain, true))
   jobs:
   - deployment: Deploy
     pool:
