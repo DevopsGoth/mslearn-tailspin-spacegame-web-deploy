@@ -80,7 +80,7 @@ stages:
 - stage: 'Deploy'
   displayName: 'Deploy the web application'
   dependsOn: Build
-  condition: and(succeeded(), eq(variables.isMain, true))
+  condition: succeeded()
   jobs:
   - deployment: Deploy
     pool:
