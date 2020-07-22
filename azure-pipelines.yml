@@ -110,5 +110,6 @@ stages:
               deploymentRevisionSource: 'workspace'
               revisionBundle: '$(buildConfiguration)'
               bucketName: '$(S3bucket)'
+              bundlePrefix: '$(Environment)'
               description: '$(Date:yyyyMMdd).$(Rev:r)'
               fileExistsBehavior: 'OVERWRITE'
