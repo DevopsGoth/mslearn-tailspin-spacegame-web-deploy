@@ -75,10 +75,6 @@ stages:
         vstsFeedPackagePublish: 'spacegame-drop'
         versionOption: 'patch'
       
-    - task: PublishBuildArtifacts@1
-      inputs:
-        pathToPublish: '$(Build.SourcesDirectory)/aws'
-        artifactName: aws
 
 
 - stage: 'Deploy'
@@ -104,3 +100,16 @@ stages:
               azureSubscription: 'resource manager - sandbox release - tailspin'
               appName: '$(WebAppName)'
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
+
+          - task: CodeDeployDeployApplication@1
+            inputs:
+              awsCredentials: 'AWS-service'
+              regionName: 'us-west-2'
+              applicationName: '$(WebAppName)'
+              deploymentGroupName: '$(DeploymentName)'
+              deploymentRevisionSource: 'workspace'
+              revisionBundle: '$(Build.ArtifactStagingDirectory)'
+              bucketName: '$(S3bucket)'
+              bundlePrefix: '$(Environment)'
+              description: '$(Date:yyyyMMdd).$(Rev:r)'
+              fileExistsBehavior: 'OVERWRITE'
