@@ -94,12 +94,6 @@ stages:
           steps:
           - download: current
             artifact: drop
-          - task: AzureWebApp@1
-            displayName: 'Azure App Service Deploy: website'
-            inputs:
-              azureSubscription: 'resource manager - sandbox release - tailspin'
-              appName: '$(WebAppName)'
-              package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
 
           - task: CodeDeployDeployApplication@1
             inputs:
@@ -112,3 +106,10 @@ stages:
               bucketName: '$(S3bucket)'
               description: '$(Date:yyyyMMdd).$(Rev:r)'
               fileExistsBehavior: 'OVERWRITE'
+
+          - task: AzureWebApp@1
+            displayName: 'Azure App Service Deploy: website'
+            inputs:
+              azureSubscription: 'resource manager - sandbox release - tailspin'
+              appName: '$(WebAppName)'
+              package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
