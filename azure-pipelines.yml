@@ -112,7 +112,7 @@ stages:
               applicationName: '$(WebAppName)'
               deploymentGroupName: '$(DeploymentName)'
               deploymentRevisionSource: 'workspace'
-              revisionBundle: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
+              revisionBundle: '$(buildConfiguration)/*.zip'
               bucketName: '$(S3bucket)'
               description: '$(Date:yyyyMMdd).$(Rev:r)'
               fileExistsBehavior: 'OVERWRITE'
