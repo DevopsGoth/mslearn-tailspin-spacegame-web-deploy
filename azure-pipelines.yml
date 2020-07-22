@@ -113,6 +113,7 @@ stages:
               deploymentGroupName: '$(DeploymentName)'
               deploymentRevisionSource: 's3'
               bucketName: '$(S3bucket)'
+              bundleKey: 'Release/Tailspin.SpaceGame.Web.zip'
               description: '$(Date:yyyyMMdd).$(Rev:r)'
               fileExistsBehavior: 'OVERWRITE'
               logRequest: true
