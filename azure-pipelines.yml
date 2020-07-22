@@ -108,7 +108,7 @@ stages:
               applicationName: '$(WebAppName)'
               deploymentGroupName: '$(DeploymentName)'
               deploymentRevisionSource: 'workspace'
-              revisionBundle: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
+              revisionBundle: '$(buildConfiguration)'
               bucketName: '$(S3bucket)'
               bundlePrefix: '$(Environment)'
               description: '$(Date:yyyyMMdd).$(Rev:r)'
