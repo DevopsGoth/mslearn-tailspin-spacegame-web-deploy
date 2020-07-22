@@ -111,13 +111,12 @@ stages:
               regionName: 'us-west-2'
               applicationName: '$(WebAppName)'
               deploymentGroupName: '$(DeploymentName)'
-              deploymentRevisionSource: s3
-              revisionBundle: '$(buildConfiguration)/*.zip'
-              bundleKey: 'Tailspin.SpaceGame.Web.zip'
-              bundlePrefix: 'Release'
+              deploymentRevisionSource: 's3'
               bucketName: '$(S3bucket)'
               description: '$(Date:yyyyMMdd).$(Rev:r)'
               fileExistsBehavior: 'OVERWRITE'
+              logRequest: true
+              logResponse: true
 
           - task: AzureWebApp@1
             displayName: 'Azure App Service Deploy: website'
