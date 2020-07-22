@@ -111,7 +111,7 @@ stages:
               regionName: 'us-west-2'
               applicationName: '$(WebAppName)'
               deploymentGroupName: '$(DeploymentName)'
-              deploymentRevisionSource: 'workspace'
+              deploymentRevisionSource: s3
               revisionBundle: '$(buildConfiguration)/*.zip'
               bucketName: '$(S3bucket)'
               description: '$(Date:yyyyMMdd).$(Rev:r)'
