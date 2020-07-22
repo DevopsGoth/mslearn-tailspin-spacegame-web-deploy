@@ -2,8 +2,8 @@ trigger:
 - '*'
 
 variables:
-  buildConfiguration: 'Release'
-  isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
+- group: 'Release'
+
 
 stages:
 - stage: 'Build'
