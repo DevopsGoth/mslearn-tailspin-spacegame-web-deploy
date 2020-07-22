@@ -95,6 +95,16 @@ stages:
           - download: current
             artifact: drop
 
+          - task: S3Upload@1
+            inputs:
+              awsCredentials: 'AWS-service'
+              regionName: 'us-west-2'
+              bucketName: '$(S3bucket)'
+              sourceFolder: '$(Pipeline.Workspace)/drop'
+              globExpressions: '**'
+              keyManagement: 'awsManaged'
+              encryptionAlgorithm: 'AES256'
+
           - task: CodeDeployDeployApplication@1
             inputs:
               awsCredentials: 'AWS-service'
