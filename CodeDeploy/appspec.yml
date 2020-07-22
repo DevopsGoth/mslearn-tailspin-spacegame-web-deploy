@@ -1,0 +1,9 @@
+version: 0.0
+os: windows
+files:
+  - source: \
+    destination: C:\temp\WebApp\Tailspin
+  
+hooks:
+  BeforeInstall:
+    - location: .\CreateWebSite.ps1

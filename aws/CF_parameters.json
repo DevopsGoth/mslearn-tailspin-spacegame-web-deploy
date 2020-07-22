@@ -6,7 +6,7 @@
     }, {
         "ParameterKey": "KeyPairName", "ParameterValue": "sandbox-primary"
     }, {
-        "ParameterKey": "OperatingSystem", "ParameterValue": "Linux"
+        "ParameterKey": "OperatingSystem", "ParameterValue": "Windows"
     }, {
         "ParameterKey": "SSHLocation", "ParameterValue": "0.0.0.0/0"
     }
