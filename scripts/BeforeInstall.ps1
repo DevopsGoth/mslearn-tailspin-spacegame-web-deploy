@@ -1,7 +1,7 @@
 #Install-WindowsFeature Web-Mgmt-Service -ErrorAction SilentlyContinue
 #Import-Module IISAdministration -ErrorAction SilentlyContinue
 
-$file = '/WebDeploy_amd64_en-US.msi'
+$file = 'WebDeploy_amd64_en-US.msi'
 $link = "https://download.microsoft.com/download/0/1/D/01DC28EA-638C-4A22-A57B-4CEF97755C6C/$file"
 $soft_name = 'webdeploy'
 
@@ -14,7 +14,7 @@ if ($find -eq $null) {
     $client.DownloadFile($link, $tmp)
 
 
-    msiexec /i $tmp ADDLOCAL=all /passive /norestart LicenseAccepted="0" /l* C:\temp\webdeploy.log /qn
+    msiexec /i $tmp ADDLOCAL=ALL /qn /norestart LicenseAccepted="0" /l* C:\temp\webdeploy.log
     #del $tmp
     echo "Tried installing $soft_name"
 
