@@ -67,7 +67,7 @@ stages:
       inputs:
         Contents: |
           scripts/*
-          appspec.yml
+          **/appspec.yml
         TargetFolder: '$(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
   
     - publish: '$(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
