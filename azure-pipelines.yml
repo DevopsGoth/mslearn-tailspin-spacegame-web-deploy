@@ -1,6 +1,13 @@
 trigger:
 - '*'
 
+resources:      
+  repositories: 
+  - repository: infrastructure
+    name: sandbox-deploy/infrastructure
+    type: git 
+    ref: master
+
 variables:
 - group: ReleaseTeamOne
 
