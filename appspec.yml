@@ -1,7 +1,7 @@
 version: 0.0
 os: windows
 files:
-  - source: \
+  - source: \Tailspin.SpaceGame.Web
     destination: C:\temp\WebApp\Tailspin
   
 hooks:

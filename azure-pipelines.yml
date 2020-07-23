@@ -91,16 +91,13 @@ stages:
           - download: current
             artifact: drop
 
-          - task: S3Upload@1
+          - task: AWSCLI@1
             inputs:
               awsCredentials: 'AWS-service'
               regionName: 'us-west-2'
-              bucketName: '$(S3bucket)'
-              sourceFolder: '$(Pipeline.Workspace)/drop'
-              globExpressions: '**'
-              targetFolder: 'release'
-              keyManagement: 'awsManaged'
-              encryptionAlgorithm: 'AES256'
+              awsCommand: 'deploy'
+              awsSubCommand: 'push'
+              awsArguments: '--application-name $(WebAppName) --description "Revision for sandbox app" --ignore-hidden-files --s3-location s3://$(S3bucket)/sitedeployment.zip --source $(Pipeline.Workspace)/drop'
 
           - task: CodeDeployDeployApplication@1
             inputs:
@@ -110,13 +107,12 @@ stages:
               deploymentGroupName: '$(DeploymentName)'
               deploymentRevisionSource: 's3'
               bucketName: '$(S3bucket)'
-              bundleKey: 'drop.zip'
-              bundlePrefix: 'release'
+              bundleKey: 'sitedeployment.zip'
               description: '$(Date:yyyyMMdd).$(Rev:r)'
               fileExistsBehavior: 'OVERWRITE'
               logRequest: true
               logResponse: true
-
+              
           - task: AzureWebApp@1
             displayName: 'Azure App Service Deploy: website'
             inputs:
