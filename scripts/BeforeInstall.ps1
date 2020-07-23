@@ -3,7 +3,7 @@
 
 $file = 'WebDeploy_amd64_en-US.msi'
 $link = "https://download.microsoft.com/download/0/1/D/01DC28EA-638C-4A22-A57B-4CEF97755C6C/$file"
-$soft_name = 'webdeploy'
+$soft_name = 'Microsoft Web Deploy 3.6'
 
 $find = Get-WmiObject -Class Win32_Product -Filter "Name = `'$soft_name`'"
 
