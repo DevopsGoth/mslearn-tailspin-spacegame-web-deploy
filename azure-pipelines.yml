@@ -2,8 +2,7 @@ trigger:
 - '*'
 
 variables:
-- group: 'Release'
-
+- group: ReleaseTeamOne
 
 stages:
 - stage: 'Build'
@@ -73,11 +72,26 @@ stages:
     - publish: '$(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
       artifact: drop
 
+- stage: 'Infrastructure'
+
 - stage: 'Deploy'
   displayName: 'Deploy the web application'
   dependsOn: Build
   condition: succeeded()
   jobs:
+  - job: InfrastructureProvision
+    displayName: "Provision CloudFormation target if needed"
+    pool:
+      vmImage: 'ubuntu-18.04'
+    steps:
+      - checkout: git://sandbox-deploy/infrastructure
+        path: infrastructure
+      
+      - template: infrastructure/azure-pipelines.yml
+        parameters:
+          variables: 
+            group: "ReleaseTeamOne"
+
   - deployment: Deploy
     pool:
       vmImage: 'ubuntu-18.04'
