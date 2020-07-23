@@ -1,1 +1,0 @@
-New-WebApplication -Site "Default Web Site" -Name sandbox-tailspin6667 -PhysicalPath c:\inetpub\wwwroot\Tailspin -Force

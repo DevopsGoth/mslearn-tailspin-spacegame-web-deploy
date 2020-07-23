@@ -1,9 +1,16 @@
 version: 0.0
 os: windows
 files:
-  - source: \Tailspin.SpaceGame.Web
-    destination: C:\temp\WebApp\Tailspin
+  - source: .\Tailspin.SpaceGame.Web.zip
+    destination: C:\temp\WebApp\
   
 hooks:
+  
   BeforeInstall:
-    - location: .\scripts\CreateWebSite.ps1
+    - location: .\scripts\BeforeInstall.ps1
+  Install:
+    - location: .\scripts\Install.ps1
+  AfterInstall:
+    - location: .\scripts\AfterInstall.ps1
+
+  

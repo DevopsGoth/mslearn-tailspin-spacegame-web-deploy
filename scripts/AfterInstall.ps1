@@ -1,0 +1,1 @@
+Write-Output "done" >> "C:\\temp\\done.log"
