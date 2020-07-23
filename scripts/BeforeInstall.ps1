@@ -13,8 +13,9 @@ if ($find -eq $null) {
     $client = New-Object System.Net.WebClient
     $client.DownloadFile($link, $tmp)
 
-    msiexec /i $tmp /qn
-    del $tmp
+
+    msiexec /i $tmp ADDLOCAL=all /passive /norestart LicenseAccepted="0" /l* C:\temp\webdeploy.log /qn
+    #del $tmp
     echo "Tried installing $soft_name"
 
 }
