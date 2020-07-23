@@ -66,7 +66,7 @@ stages:
     - task: CopyFiles@2
       inputs:
         Contents: |
-          /CodeDeploy
+          CodeDeploy/*
           appspec.yml
         TargetFolder: '$(Build.ArtifactStagingDirectory)'
   
