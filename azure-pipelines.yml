@@ -62,18 +62,18 @@ stages:
         publishWebProjects: false
         arguments: '--no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
         zipAfterPublish: true
+        
+    - task: CopyFiles@2
+      inputs:
+        Contents: |
+          /CodeDeploy
+          appspec.yml
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
   
     - publish: '$(Build.ArtifactStagingDirectory)'
       artifact: drop
 
-    - task: UniversalPackages@0
-      inputs:
-        command: 'publish'
-        publishDirectory: '$(Build.ArtifactStagingDirectory)'
-        feedsToUsePublish: 'internal'
-        vstsFeedPublish: 'ff55d2d1-7bc2-4650-b7bc-dc670a0eb2bf/97374bed-5c36-4435-8189-eeee8aa38e86'
-        vstsFeedPackagePublish: 'spacegame-drop'
-        versionOption: 'patch'
+
       
 
 
