@@ -61,21 +61,17 @@ stages:
         projects: '**/*.csproj'
         publishWebProjects: false
         arguments: '--no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
-        zipAfterPublish: true
+        zipAfterPublish: false
         
     - task: CopyFiles@2
       inputs:
         Contents: |
-          CodeDeploy/*
+          scripts/*
           appspec.yml
-        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
   
-    - publish: '$(Build.ArtifactStagingDirectory)'
+    - publish: '$(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
       artifact: drop
-
-
-      
-
 
 - stage: 'Deploy'
   displayName: 'Deploy the web application'
@@ -95,16 +91,6 @@ stages:
           - download: current
             artifact: drop
 
-          - task: S3Upload@1
-            inputs:
-              awsCredentials: 'AWS-service'
-              regionName: 'us-west-2'
-              bucketName: '$(S3bucket)'
-              sourceFolder: '$(Pipeline.Workspace)/drop'
-              globExpressions: '**'
-              keyManagement: 'awsManaged'
-              encryptionAlgorithm: 'AES256'
-
           - task: CodeDeployDeployApplication@1
             inputs:
               awsCredentials: 'AWS-service'
@@ -113,7 +99,7 @@ stages:
               deploymentGroupName: '$(DeploymentName)'
               deploymentRevisionSource: 's3'
               bucketName: '$(S3bucket)'
-              bundleKey: 'Release/Tailspin.SpaceGame.Web.zip'
+              bundleKey: '$(Pipeline.Workspace)/drop'
               description: '$(Date:yyyyMMdd).$(Rev:r)'
               fileExistsBehavior: 'OVERWRITE'
               logRequest: true
